@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From My Heart to Yours 💝</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #ff6b8b, #ff8e9e, #ffc2d1, #ffe0e6, #fff0f3);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .romantic-font {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 118, 138, 0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .page-title {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        .message-card {
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            max-width: 800px;
+            transition: all 0.3s ease;
+        }
+        
+        .message-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gif-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .gif-card {
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .gif-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+        }
+        
+        .gif-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gif-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gif-caption {
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .love-letter {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: 3rem auto;
+            max-width: 700px;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            position: relative;
+        }
+        
+        .love-letter.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .love-letter:before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            filter: blur(10px);
+            z-index: -1;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin: 1rem 0.5rem;
+        }
+        
+        .btn-yes {
+            background: linear-gradient(45deg, #ff4b8d, #ff7eb3);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 75, 141, 0.4);
+        }
+        
+        .btn-no {
+            background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+            color: white;
+            box-shadow: 0 4px 15px rgba(161, 140, 209, 0.4);
+            font-size: 1.5rem;  /* Increased from 1.2rem */
+            padding: 1.5rem 3rem;  /* Increased from 1rem 2rem */
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .heart {
+            position: fixed;
+            font-size: 1.5rem;
+            animation: float 4s ease-in-out infinite, opacity 4s linear forwards;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(10deg); }
+            50% { transform: translateY(-40px) rotate(0deg); }
+            75% { transform: translateY(-20px) rotate(-10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        @keyframes opacity {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        .crying-emoji {
+            position: absolute;
+            top: -50px;
+            animation: fall linear forwards;
+            z-index: 1000;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        
+        .heartbeat {
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: white;
+            animation: sparkle 1s linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Popup styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .popup-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .popup-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            min-height: 300px;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 118, 138, 0.2);
+        }
+        
+        .popup-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .popup-buttons {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            min-height: 80px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .gif-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gif-card img {
+                height: 200px;
+            }
+            
+            .btn {
+                width: 80%;
+                margin: 0.5rem auto;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title romantic-font text-center" style="font-size: 4rem; color: #ff357b;">
+            My Heart Beats Only For You <span class="heartbeat" style="display: inline-block;">❤️</span>
+        </h1>
+        
+        <div class="message-card glass-effect">
+            <p class="romantic-font" style="font-size: 2rem; color: #d5365c; line-height: 1.4;">
+                Every moment without your smile feels like an eternity...
+                <br>Will you find it in your heart to forgive me? 🥺
+            </p>
+        </div>
+        
+        <div class="gif-container">
+            <div class="gif-card glass-effect">
+                <img src="./cry1.gif" alt="Love GIF" />
+                <div class="gif-caption">
+                    <p class="romantic-font" style="font-size: 1.8rem; color: #e84a7f;">Missing you like crazy... 💗</p>
+                </div>
+            </div>
+            
+            <div class="gif-card glass-effect">
+                <img src="./cry5.jpg" alt="Heart GIF" />
+                <div class="gif-caption">
+                    <p class="romantic-font" style="font-size: 1.8rem; color: #e84a7f;">My heart belongs to you... 💝</p>
+                </div>
+            </div>
+            
+            <div class="gif-card glass-effect">
+                <img src="./cry6.jpg" alt="Cute GIF" />
+                <div class="gif-caption">
+                    <p class="romantic-font" style="font-size: 1.8rem; color: #e84a7f;">plss mujhe maaf kre mam... 💖</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="loveLetter" class="love-letter glass-effect hidden">
+            <h2 class="romantic-font text-center" style="font-size: 2.5rem; color: #ff357b; margin-bottom: 1.5rem;">
+                My Dearest person bebe ❤️
+            </h2>
+            <p style="font-size: 1.2rem; color: #d5365c; line-height: 1.8; margin-bottom: 1.5rem;">
+                I'm really sorry for what I said yesterday.
+                mai aisa nhi khna chahta tha I never meant to hurt you — tum  meri cutie person ho 
+                . Tumhari smile yrr mai  chahta hu ki vo smile hamesha rahe. pta nhi kyu dimag nhi mere par khd gussa dila deta hu i am really srry bebe , 
+                  aur tumhare sath jb rhta hu to yaar idk why  khd shyness aane lgti hai  I made a mistake, but mera vo mtlb nhi tha i am srry  so srry bda wala srry.
+                  Please forgive me, mai aage se nahi bolunga aisa kch ..
+            </p>
+            <p style="font-size: 1.2rem; color: #d5365c; line-height: 1.8; margin-bottom: 1.5rem;">
+                You are my everything,. I promise to cherish every moment with you 
+                and make you the happiest person alive. to apne mujhe maaf kiya ya nahi plss maaf kr do agr nhi kiya to
+               . 
+            </p>
+            <p class="romantic-font text-center" style="font-size: 2rem; color: #ff357b; margin-top: 1.5rem;">
+                Aage se nahi bolunga  💝
+            </p>
+        </div>
+        
+        <div class="btn-container">
+            <button class="btn btn-yes" onclick="showLoveLetter()">
+                Yes, I Forgive You! 💖
+            </button>
+            <button class="btn btn-no" onclick="showCryingEmojis()">
+                Not Yet... 😢
+            </button>
+        </div>
+    </div>
+    
+   
+
+    <!-- Popup dialog that appears after clicking "Not Yet" -->
+    <div id="popupOverlay" class="popup-overlay">
+        <div class="popup-container glass-effect">
+            <div class="popup-content">
+                <h3 class="romantic-font" style="font-size: 2rem; color: #ff357b; margin-bottom: 1rem;">
+                    Think About It Again... 🥺
+                </h3>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                    accha ab aisa nhi bolunga srry yaad rkhunga abse mai .... ❤️
+                </p>
+                <div class="popup-buttons" style="position: relative; height: 80px;">
+                    <button class="btn btn-yes" style="position: relative;" onclick="handleForgiveness()">
+                        Ok, I Forgive You 💖
+                    </button>
+                    <button id="notYetBtn" class="btn btn-no" onmouseover="moveButton()" onclick="moveButton()">
+                        Not Yet 😢
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create background hearts
+        function createBackgroundHearts() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = Math.random() * 100 + 'vh';
+                    heart.style.opacity = '0.6';
+                    heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 300);
+            }
+            
+            setTimeout(createBackgroundHearts, 5000);
+        }
+        
+        // Create sparkles for title
+        function createSparkles() {
+            const title = document.querySelector('.page-title');
+            const rect = title.getBoundingClientRect();
+            
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.classList.add('sparkle');
+                    
+                    // Random position around the title
+                    const x = rect.left + Math.random() * rect.width;
+                    const y = rect.top + Math.random() * rect.height;
+                    
+                    sparkle.style.left = x + 'px';
+                    sparkle.style.top = y + 'px';
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 1000);
+                }, i * 200);
+            }
+            
+            setTimeout(createSparkles, 1000);
+        }
+        
+        // Show love letter
+        function showLoveLetter() {
+            const letter = document.getElementById('loveLetter');
+            letter.classList.remove('hidden');
+            
+            setTimeout(() => {
+                letter.classList.add('show');
+                
+                // Create floating hearts animation
+                for(let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        createFloatingHeart();
+                    }, i * 100);
+                }
+            }, 100);
+            
+            // Add subtle movement to GIF cards
+            const gifCards = document.querySelectorAll('.gif-card');
+            gifCards.forEach(card => {
+                card.style.transform = 'translateY(-10px)';
+                card.style.boxShadow = '0 15px 35px rgba(255, 105, 180, 0.4)';
+            });
+        }
+        
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            const size = Math.random() * 30 + 20;
+            const duration = Math.random() * 4 + 3;
+            const type = Math.random() > 0.5 ? '❤️' : '💖';
+            
+            heart.innerHTML = type;
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = size + 'px';
+            heart.style.animation = `float ${duration}s ease-in-out`;
+            heart.style.transform = 'translateY(0)';
+            heart.style.opacity = '0.8';
+            
+            document.body.appendChild(heart);
+            
+            heart.animate([
+                { transform: 'translateY(0)', opacity: 0 },
+                { transform: 'translateY(-100vh)', opacity: 1 }
+            ], {
+                duration: duration * 1000,
+                easing: 'ease-out'
+            }).onfinish = () => heart.remove();
+        }
+        
+        function showCryingEmojis() {
+            // Create raining crying emojis
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    createCryingEmoji();
+                }, i * 150);
+            }
+            
+            // Show the popup after a brief delay
+            setTimeout(() => {
+                showPopup();
+            }, 1000);
+        }
+        
+        // Show popup function
+        function showPopup() {
+            const popup = document.getElementById('popupOverlay');
+            popup.classList.add('show');
+        }
+        
+        function handleForgiveness() {
+            closePopup();
+            document.querySelector('.btn-no').style.display = 'none';
+
+            
+            // Update main button functionality
+            const mainButton = document.querySelector('.btn-container > .btn-yes');
+            if (mainButton) {
+                mainButton.innerHTML = 'Send Me a Message 💌';
+                mainButton.onclick = () => {
+                    showMessageComposer();
+                    window.scrollTo({
+                        top: document.body.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                };
+            }
+            
+            // Show love letter
+            const letter = document.getElementById('loveLetter');
+            letter.classList.remove('hidden');
+            setTimeout(() => letter.classList.add('show'), 100);
+        }
+        
+        // Full message composer implementation
+        function showMessageComposer() {
+            const composer = document.createElement('div');
+            composer.className = 'glass-effect';
+            composer.style.margin = '2rem auto';
+            composer.style.padding = '2rem';
+            composer.style.borderRadius = '1rem';
+            composer.style.maxWidth = '600px';
+        
+            composer.innerHTML = `
+                <form 
+                    action="https://formspree.io/f/xyzwwjwp"
+                    method="POST"
+                    class="romantic-font"
+                    style="color: #ff357b"
+                >
+                    <h3 class="romantic-font" style="font-size: 2rem; margin-bottom: 1.5rem;">
+                        Pour Your Heart Out 💌
+                    </h3>
+                    <label style="display: block; margin-bottom: 1.5rem;">
+                        Your Message:
+                        <textarea 
+                            name="message"
+                            placeholder="Type your heartfelt message here..."
+                            style="width: 100%; height: 200px; padding: 1rem; margin-top: 0.5rem; border-radius: 1rem; border: none;"
+                            required
+                        ></textarea>
+                    </label>
+                    <button 
+                        type="submit"
+                        class="btn btn-yes"
+                        style="margin-top: 1.5rem"
+                    >
+                        Send with Love 💖
+                    </button>
+                </form>
+            `;
+        
+            // Insert after love letter
+            const loveLetter = document.getElementById('loveLetter');
+            loveLetter.parentNode.insertBefore(composer, loveLetter.nextSibling);
+        
+            // Add smooth scroll to composer
+            setTimeout(() => {
+                composer.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+        
+        // Message sending functionality
+        function sendMessage() {
+            const composer = document.querySelector('.message-composer');
+            const message = composer.querySelector('textarea').value;
+            
+            if(message.trim()) {
+                alert('Message sent with love! 💌\n\n' + message);
+                composer.remove();
+            }
+            
+            // Restore button functionality
+            document.querySelector('.btn-container > .btn-yes').onclick = showMessageComposer;
+        }
+        
+        // Update closePopup function
+        function closePopup() {
+            const popup = document.getElementById('popupOverlay');
+            popup.style.transition = 'opacity 0.5s ease';
+            popup.style.opacity = '0';
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 500);
+        }
+        
+        // Move button function to make "Not Yet" button dodge the cursor
+        function moveButton() {
+            const button = document.getElementById('notYetBtn');
+            const container = button.parentElement;
+            
+            // Calculate safe movement area (50px radius from center)
+            const centerX = container.offsetWidth/2 - button.offsetWidth/2;
+            const centerY = container.offsetHeight/2 - button.offsetHeight/2;
+            
+            // Generate new position within safe area
+            const newX = centerX + (Math.random() * 100 - 50);
+            const newY = centerY + (Math.random() * 100 - 50);
+            
+            // Apply smooth transition
+            button.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            button.style.transform = `translate(${newX}px, ${newY}px)`;
+            
+            // Reset transition after movement
+            setTimeout(() => {
+                button.style.transition = '';
+            }, 400);
+        }
+        
+        // Create sparkling hearts
+        function createCryingEmoji() {
+            const emoji = document.createElement('div');
+            const size = Math.random() * 25 + 20;
+            const duration = Math.random() * 3 + 2;
+            const types = ['😢', '😭', '💔', '😔'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            
+            emoji.innerHTML = type;
+            emoji.className = 'crying-emoji';
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.top = '-50px';
+            emoji.style.fontSize = size + 'px';
+            emoji.style.position = 'fixed';
+            
+            document.body.appendChild(emoji);
+            
+            emoji.animate([
+                { transform: 'translateY(0)' },
+                { transform: 'translateY(100vh)' }
+            ], {
+                duration: duration * 1000,
+                easing: 'cubic-bezier(0.4, 0, 1, 1)'
+            }).onfinish = () => emoji.remove();
+        }
+        
+        // Initialize
+        window.onload = function() {
+            createBackgroundHearts();
+            createSparkles();
+        };
+    </script>
+</body>
+</html>
+

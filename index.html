@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Heart's Message 💌</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #ff6b8b, #ff8e9e, #ffc2d1, #ffe0e6, #fff0f3);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .entry-btn {
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #ff4b8d, #ff7eb3);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 75, 141, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Dancing Script', cursive;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .entry-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 75, 141, 0.6);
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+        .heart {
+            position: fixed;
+            font-size: 1.5rem;
+            animation: float 4s ease-in-out infinite, opacity 4s linear forwards;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(10deg); }
+            50% { transform: translateY(-40px) rotate(0deg); }
+            75% { transform: translateY(-20px) rotate(-10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        @keyframes opacity {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <button class="entry-btn" 
+                onclick="location.href='srry.html'"
+                onmousedown="this.style.transform='scale(0.95)'"
+                onmouseup="this.style.transform=''">
+            Open My Heart's  Message 💌
+        </button>
+    </div>
+</body>
+<script>
+$(document).ready(function() {
+    function createBackgroundHearts() {
+        const heartTypes = ['❤️', '💖', '💗', '💓'];
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 4000);
+            }, i * 300);
+        }
+        setTimeout(createBackgroundHearts, 5000);
+    }
+    createBackgroundHearts();
+});
+</script>
+</html>
