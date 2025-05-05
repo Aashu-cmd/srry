@@ -86,15 +86,20 @@
 <body>
     <div class="container">
         <button class="entry-btn" 
-                onclick="location.href='srry.html'"
+                id="mainButton"
                 onmousedown="this.style.transform='scale(0.95)'"
                 onmouseup="this.style.transform=''">
-            Open My Heart's  Message 💌
+            Open My Heart's Message 💌
         </button>
     </div>
 </body>
 <script>
 $(document).ready(function() {
+    // Add click handler
+    $('#mainButton').click(function() {
+        window.location.href = 'srry.html';
+    });
+
     function createBackgroundHearts() {
         const heartTypes = ['❤️', '💖', '💗', '💓'];
         for (let i = 0; i < 20; i++) {
